@@ -1,0 +1,12 @@
+[submodule "gbbs"]
+	path = gbbs
+	url = https://github.com/ParAlg/gbbs
+[submodule "pargeo"]
+	path = pargeo
+	url = https://github.com/wangyiqiu/pargeo
+[submodule "parlaylib"]
+	path = parlaylib
+	url = https://github.com/wangyiqiu/parlaylib
+[submodule "pybind11"]
+	path = pybind11
+	url = https://github.com/pybind/pybind11.git
