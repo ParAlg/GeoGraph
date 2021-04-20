@@ -1,5 +1,5 @@
-import gbbs
 import pypargeo
+import gbbs
 
 '''
 IO functions
@@ -26,10 +26,3 @@ def GabrielGraph(points):
 
 def BetaSkeleton(points, beta):
   return pypargeo.BetaSkeleton(points, beta)
-
-'''
-Graph constructors
-'''
-
-def loadFromEdgeList(edges):
-  return gbbs.loadFromEdgeList(edges)
