@@ -4,7 +4,7 @@ from matplotlib import pyplot as plt
 from matplotlib.collections import LineCollection
 import numpy as np
 
-def visualizeComponent(points, edges, C):
+def visualizeComponent(points, edges, C, name="fig"):
   baseColors = ['tab:blue'
             ,'tab:orange'
             ,'tab:green'
@@ -29,10 +29,14 @@ def visualizeComponent(points, edges, C):
       plt.scatter(p[0], p[1], color=baseColors[C[i] % len(baseColors)], s=200)
   plt.gca().set_aspect('equal', adjustable='box')
   plt.show()
-  #fig.savefig(name+".png")
+  fig.savefig(name+".pdf")
 
-def visualizeRank(points, edges, R):
-  A = [(r-min(R))/(max(R)-min(R)) for r in R]
+def visualizeRank(points, edges, R, name="fig", labels=None):
+  print(R)
+  myMin = min(R)
+  myMax = max(R)
+  A = [(r-myMin)/(myMax-myMin)+0.1 for r in R]
+  A = [min(a,1) for a in A]
   print(A)
   lc = LineCollection(points[edges])
   fig = plt.figure()
@@ -45,9 +49,11 @@ def visualizeRank(points, edges, R):
   plt.plot(points[:,0], points[:,1], 'ro', markersize=0)
   for i,p in enumerate(points):
       plt.scatter(p[0], p[1], alpha=A[i], s=200, color='tab:blue')
+      if labels:
+        plt.annotate(labels[i], (p[0]+0.02, p[1]+0.02), fontsize=20)
   plt.gca().set_aspect('equal', adjustable='box')
   plt.show()
-  #fig.savefig(name+".png")
+  fig.savefig(name+".pdf")
 
 ### Load / generate data
 
