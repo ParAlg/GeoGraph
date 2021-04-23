@@ -4,7 +4,7 @@ from matplotlib import pyplot as plt
 from matplotlib.collections import LineCollection
 import numpy as np
 
-def visualizeComponent(points, edges, C, name="fig"):
+def visualizeComponent(points, edges, C, name="fig", labels=None):
   baseColors = ['tab:blue'
             ,'tab:orange'
             ,'tab:green'
@@ -27,6 +27,8 @@ def visualizeComponent(points, edges, C, name="fig"):
   plt.plot(points[:,0], points[:,1], 'ro', markersize=0)
   for i,p in enumerate(points):
       plt.scatter(p[0], p[1], color=baseColors[C[i] % len(baseColors)], s=200)
+      if labels:
+        plt.annotate(labels[i], (p[0]+0.02, p[1]+0.02), fontsize=20)
   plt.gca().set_aspect('equal', adjustable='box')
   plt.show()
   fig.savefig(name+".pdf")
@@ -59,6 +61,10 @@ def visualizeRank(points, edges, R, name="fig", labels=None):
 
 def dataGen(n, save = ""):
   points = np.random.random((n, 2))
+  points = points * 10
   if (save != ""):
     np.savetxt(save, points, delimiter=",")
   return points
+
+def dataStore(points, save):
+  np.savetxt(save, points, delimiter=",")
