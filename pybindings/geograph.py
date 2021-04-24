@@ -8,8 +8,24 @@ IO functions
 def loadPoints(fileName):
   return pypargeo.loadPoints(fileName)
 
-def loadGraph(graphPath="",undirected=True, compressed=False, binary=False):
-  return gbbs.loadGraph(graphPath, undirected, compressed, binary)
+def saveEdgeSnap(fileName, edges):
+  if edges.shape[1] == 3 and edges.dtype == "float32":
+    pypargeo.writeWghEdges(fileName, edges)
+  elif edges.shape[1] == 2 and edges.dtype == "uint32":
+    pypargeo.writeEdges(fileName, edges)
+  else:
+    print("Incorrect edge list format.")
+    exit(1)
+
+def loadFromSnap(fileName, weighted = False, symmetric = True):
+  if weighted:
+    return gbbs.loadFloatSnap(fileName, symmetric)
+  else:
+    return gbbs.loadSnap(fileName, symmetric)
+
+'''
+Graph constructor
+'''
 
 def loadFromEdgeList(edges, symmetric=True, weighted=False):
   return gbbs.loadFromEdgeList(edges, symmetric, weighted)

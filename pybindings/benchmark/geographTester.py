@@ -10,10 +10,6 @@ def delaunayGraph(X):
 
 def knnGraph(X):
   edges = geograph.KnnGraph(X, 3, -1, True)
-  print(edges)
-  f = open("10k.npy", "wb")
-  np.save(f, edges)
-  print("saved")
   return geograph.loadFromEdgeList(edges, True, True)
 
 def filteredKnnGraph(X):
