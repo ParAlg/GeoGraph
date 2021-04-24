@@ -1,6 +1,7 @@
 import time
 import higraTester as ht
 import geographTester as gt
+import geographSnapTester as gst
 
 '''
 Benchmark = data set + target impl
@@ -67,24 +68,31 @@ def bench(filePath):
   gg4 = Benchmark("geograph-gabriel-sssp", gt.loadPoints, gt.gabrielGraph, gt.SSSP)
   gg4.run(filePath)
 
+  gs1 = Benchmark("geograph-snap-dt-mst", gt.loadPoints, gst.delaunayGraph, gt.MST)
+  gs1.run(filePath)
+
+  gs2 = Benchmark("geograph-snap-3nn-clink", gt.loadPoints, gst.knnGraph, gt.CLINK)
+  gs2.run(filePath)
+
+  gs3 = Benchmark("geograph-snap-3nn-filtered-cc", gt.loadPoints, gst.filteredKnnGraph, gt.CC)
+  gs3.run(filePath)
+
+  gs4 = Benchmark("geograph-snap-gabriel-sssp", gt.loadPoints, gst.gabrielGraph, gt.SSSP)
+  gs4.run(filePath)
+
   hg1.info()
   hg2.info()
+
+  gs1.info()
+  gs2.info()
+  gs3.info()
+  gs4.info()
 
   gg1.info()
   gg2.info()
   gg3.info()
   gg4.info()
 
-bench("100k.csv")
-# gg2 = Benchmark("gbbs-linkage-test", gt.loadPoints, gt.knnGraph, gt.CLINK)
-# gg2.run("10k.csv")
-
-# import numpy as np
-# f = open("10k.npy", "rb")
-# edges = np.load(f)
-# print(edges.shape)
-# import gbbs
-# G = gbbs.loadFromEdgeList(edges, True, True)
-# G.HierarchicalAgglomerativeClustering("single", True)
-# #G.HierarchicalAgglomerativeClustering("complete", True)
-# #G.MinimumSpanningForest()
+import utils
+P = utils.clusteredDataGen(100000, "tmp.csv")
+bench("tmp.csv")

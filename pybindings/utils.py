@@ -63,9 +63,16 @@ def visualizeRank(points, edges, R, name="fig", labels=None):
 
 ### Load / generate data
 
-def dataGen(n, save = ""):
+def uniformDataGen(n, save = ""):
   points = np.random.random((n, 2))
   points = points * 10
+  if (save != ""):
+    np.savetxt(save, points, delimiter=",")
+  return points
+
+def clusteredDataGen(n, save = ""):
+  import sklearn.datasets
+  points, labels = sklearn.datasets.make_blobs(n, cluster_std=[1.0, 2.5, 0.5], random_state=220)
   if (save != ""):
     np.savetxt(save, points, delimiter=",")
   return points
