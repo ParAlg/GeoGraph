@@ -58,7 +58,7 @@ def bench(filePath):
   gg1 = Benchmark("geograph-dt-mst", gt.loadPoints, gt.delaunayGraph, gt.MST)
   gg1.run(filePath)
 
-  gg2 = Benchmark("geograph-3nn-clink", gt.loadPoints, gt.knnGraph, gt.CLINK) # todo clink
+  gg2 = Benchmark("geograph-3nn-clink", gt.loadPoints, gt.knnGraph, gt.CLINK)
   gg2.run(filePath)
 
   gg3 = Benchmark("geograph-3nn-filtered-cc", gt.loadPoints, gt.filteredKnnGraph, gt.CC)
@@ -74,3 +74,17 @@ def bench(filePath):
   gg2.info()
   gg3.info()
   gg4.info()
+
+bench("100k.csv")
+# gg2 = Benchmark("gbbs-linkage-test", gt.loadPoints, gt.knnGraph, gt.CLINK)
+# gg2.run("10k.csv")
+
+# import numpy as np
+# f = open("10k.npy", "rb")
+# edges = np.load(f)
+# print(edges.shape)
+# import gbbs
+# G = gbbs.loadFromEdgeList(edges, True, True)
+# G.HierarchicalAgglomerativeClustering("single", True)
+# #G.HierarchicalAgglomerativeClustering("complete", True)
+# #G.MinimumSpanningForest()
