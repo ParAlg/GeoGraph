@@ -1,5 +1,7 @@
+#!/usr/bin/env python3
 import numpy as np
 import higra as hg
+from benchmark import Benchmark
 
 def loadPoints(fileName):
   return np.loadtxt(fileName, delimiter=",")
@@ -20,3 +22,16 @@ def SLINK(G):
 
 def CLINK(G):
   return hg.binary_partition_tree_complete_linkage(G[0], G[1])
+
+if __name__ == "__main__":
+  import sys
+  filePath = sys.argv[1]
+
+  hg1 = Benchmark("higra-dt-mst", loadPoints, delaunayGraph, MST)
+  hg1.run(filePath)
+
+  hg2 = Benchmark("higra-3nn-clink", loadPoints, knnGraph, CLINK)
+  hg2.run(filePath)
+
+  hg1.info()
+  hg2.info()

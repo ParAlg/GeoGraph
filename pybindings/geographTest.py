@@ -1,5 +1,7 @@
+#!/usr/bin/env python3
 import numpy as np
 import geograph
+from benchmark import Benchmark
 
 def loadPoints(fileName):
   return geograph.loadPoints(fileName)
@@ -33,4 +35,25 @@ def CC(G):
   return G.Connectivity()
 
 def SSSP(G):
-  return G.SSSP(0)
+  return G.DeltaStepping(0, 0.01)
+
+if __name__ == "__main__":
+  import sys
+  filePath = sys.argv[1]
+
+  gg1 = Benchmark("geograph-dt-mst", loadPoints, delaunayGraph, MST)
+  gg1.run(filePath)
+
+  gg2 = Benchmark("geograph-3nn-clink", loadPoints, knnGraph, CLINK)
+  gg2.run(filePath)
+
+  gg3 = Benchmark("geograph-3nn-filtered-cc", loadPoints, filteredKnnGraph, CC)
+  gg3.run(filePath)
+
+  gg4 = Benchmark("geograph-gabriel-sssp", loadPoints, gabrielGraph, SSSP)
+  gg4.run(filePath)
+
+  gg1.info()
+  gg2.info()
+  gg3.info()
+  gg4.info()
