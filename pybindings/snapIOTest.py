@@ -30,7 +30,9 @@ def cleanUp():
 
 if __name__ == "__main__":
   import sys
-  filePath = sys.argv[1]
+  filePath = "data.csv"
+  if len(sys.argv) > 1:
+    filePath = sys.argv[1]
 
   gg1 = Benchmark("geograph-dt-mst", gt.loadPoints, delaunayGraph, gt.MST)
   gg1.run(filePath)

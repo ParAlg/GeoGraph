@@ -25,7 +25,9 @@ def CLINK(G):
 
 if __name__ == "__main__":
   import sys
-  filePath = sys.argv[1]
+  filePath = "data.csv"
+  if len(sys.argv) > 1:
+    filePath = sys.argv[1]
 
   hg1 = Benchmark("higra-dt-mst", loadPoints, delaunayGraph, MST)
   hg1.run(filePath)

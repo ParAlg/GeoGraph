@@ -39,7 +39,9 @@ def SSSP(G):
 
 if __name__ == "__main__":
   import sys
-  filePath = sys.argv[1]
+  filePath = "data.csv"
+  if len(sys.argv) > 1:
+    filePath = sys.argv[1]
 
   gg1 = Benchmark("geograph-dt-mst", loadPoints, delaunayGraph, MST)
   gg1.run(filePath)
