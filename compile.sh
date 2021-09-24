@@ -29,4 +29,4 @@ echo ">>> Creating symbolic links"
 cd pybindings
 ln -s ../gbbs/bazel-bin/pybindings/*.so .
 ln -s ../gbbs/gbbs.py .
-ln -s ../pargeo/build/pybindings/*.so .
+ln -s ../pargeo/build/pybinding/*.so .
