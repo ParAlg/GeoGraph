@@ -19,8 +19,8 @@ git submodule init
 git submodule update
 mkdir build
 cd build
-cmake ..
-cd pybindings
+cmake -DUSE_PYBIND=ON ..
+cd pybinding
 make
 cd ../../..
 
